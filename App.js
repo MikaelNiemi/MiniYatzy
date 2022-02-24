@@ -21,7 +21,7 @@ export default function Gameboard() {
     useState(new Array(NBR_OF_DICES).fill(false));
   const [selectSpots, setSelectedSpots] =
     useState(new Array(NBR_OF_SPOTS).fill(false));
-  const [Bonus, setBonus] =
+  const [selectBonus, setSelectedBonus] =
     useState(new Array(NBR_OF_BONUS).fill(false));
 
   // Noppien valinta
@@ -53,14 +53,12 @@ export default function Gameboard() {
   // Muokkaa paljon
   function checkBonusPoints() {
     if (board.every((val, i, arr) => val === arr[0]) && nbrOfThrowsLeft > 0) {
-      setStatus('You won');
+
     }
     else if (board.every((val, i, arr) => val === arr[0]) && nbrOfThrowsLeft === 0) {
-      setStatus('You won, game over');
       setSelectedDices(new Array(NBR_OF_DICES).fill(false));
     }
     else if (nbrOfThrowsLeft === 0) {
-      setStatus('Game over');
       setSelectedDices(new Array(NBR_OF_DICES).fill(false));
     }
     else {
