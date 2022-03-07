@@ -38,18 +38,28 @@ export default function Gameboard() {
     if (nbrOfThrowsLeft === 0) {
       setSelectedDices(new Array(NBR_OF_DICES).fill(false));
       setNbrOfThrowsLeft(NBR_OF_THROWS);
+    } else {
+      setStatus('Throw 3 times before setting points');
     }
   }
   
   // Noppien heitto
   function throwDices() {
-    for (let i = 0; i < NBR_OF_DICES; i++) {
-      if (!selectDices[i]) {
-      let randomNumber = Math.floor(Math.random() * 6 + 1);
-      board[i] = 'dice-' + randomNumber;
+    if (nbrOfThrowsLeft === 0) {
+      setStatus('Select your points before next throw');
+    } else {
+      for (let i = 0; i < NBR_OF_DICES; i++) {
+        if (!selectDices[i]) {
+        let randomNumber = Math.floor(Math.random() * 6 + 1);
+        board[i] = 'dice-' + randomNumber;
+        }
       }
+      setNbrOfThrowsLeft(nbrOfThrowsLeft-1);
     }
-    setNbrOfThrowsLeft(nbrOfThrowsLeft-1);
+  }
+
+  function countPoint() {
+    total = [].reduce((partialSum, a) => partialSum + a, 0);
   }
 
   // Muokkaa paljon
